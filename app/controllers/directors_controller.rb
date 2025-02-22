@@ -40,12 +40,12 @@ class DirectorsController < ApplicationController
   def insert
     new_director = Director.new
 
-    Director.name = params.fetch("director_name")
-    Director.dob = params.fetch("director_dob")
-    Director.bio = params.fetch("director_bio")
-    Director.image = params.fetch("director_image_url")
-    Director.save
-    
+    new_director.name = params.fetch("director_name")
+    new_director.dob = params.fetch("director_dob")
+    new_director.bio = params.fetch("director_bio")
+    new_director.image = params.fetch("director_image_url")
+    new_director.save
+
     redirect_to("/directors")
   end
 
