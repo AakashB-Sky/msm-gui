@@ -30,11 +30,25 @@ class ActorsController < ApplicationController
   def delete
     actor_id = params.fetch("path_id")
 
-    matching_records = Actor.where({ :id => actor_id }) # relation of all actors with the path_id (should be just one)
-    the_actor = matching_records.first # pull out first (and only) actor from relation
+    # pull the actor
+    the_actor = Actor.where({ :id => actor_id }).first # relation of all actors with the path_id (should be just one) and pull the first one
 
     the_actor.delete
   
     redirect_to("/actors")
+  end
+
+  def update
+    # find existing actor
+    the_actor = Actor.where({ :id => params.fetch("path_id")}).first
+
+    # update fields
+    the_actor.name = params.fetch("actor_name")
+    the_actor.dob = params.fetch("actor_dob")
+    the_actor.bio = params.fetch("actor_bio")
+    the_actor.image = params.fetch("actor_image_url")
+    the_actor.save
+
+    redirect_to("/actors/#{params.fetch("path_id")}")
   end
 end
