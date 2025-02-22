@@ -26,4 +26,15 @@ class ActorsController < ApplicationController
 
     redirect_to("/actors")
   end
+
+  def delete
+    actor_id = params.fetch("path_id")
+
+    matching_records = Actor.where({ :id => actor_id }) # relation of all actors with the path_id (should be just one)
+    the_actor = matching_records.first # pull out first (and only) actor from relation
+
+    the_actor.delete
+  
+    redirect_to("/actors")
+  end
 end
