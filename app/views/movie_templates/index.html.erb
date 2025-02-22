@@ -91,7 +91,15 @@
       
       <% the_director = matching_directors.at(0) %>
 
-      <%= the_director.name %>
+      <!-- error handler if no director is found -->
+
+      <% if the_director == nil %>
+        No director found!
+      <% else %>
+        <%= the_director.name %>
+      <% end %>
+
+      <!-- end error handler -->
     </td>
 
     <td>
