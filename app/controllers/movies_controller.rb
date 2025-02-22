@@ -28,4 +28,32 @@ class MoviesController < ApplicationController
 
     redirect_to("/movies")
   end
+
+  def delete
+    movie_id = params.fetch("path_id")
+
+    # pull movie from database
+    the_movie = Movie.where({ :id => movie_id}).first
+
+    the_movie.delete
+
+    redirect_to("/movies")
+  end
+
+  def update
+    movie_id = params.fetch("path_id")
+    
+    # pull movie from database
+    the_movie = Movie.where({ :id => movie_id}).first
+    
+    the_movie.title = params.fetch("movie_title")
+    the_movie.year = params.fetch("movie_year")
+    the_movie.duration = params.fetch("duration")
+    the_movie.description = params.fetch("movie_desc")
+    the_movie.image = params.fetch("movie_image_url")
+    the_movie.director_id = params.fetch("director_id")
+    the_movie.save
+
+    redirect_to("/movies/#{movie_id}")
+  end
 end
